@@ -1,0 +1,57 @@
+<%- include('cmsPartial/headCms') %>
+<%- include('cmsPartial/cmsNav') %>
+
+    <h2 class="text-center text-danger">List of Ruang Kepsek Courses</h2>
+
+    <!-- Data section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center mx-auto">
+                <a href="/cms/courses/add"><button class="btn btn-info">Add New Course</button></a>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                              <th scope="col">No</th>
+                              <th scope="col">Image</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">duration</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Category</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody >
+                            <% data.forEach((el,i) => { %>
+                                <tr class="text-center">
+                                    <td><%= i + 1 %></td>
+                                    <td>
+                                        <img src="<%= el.photoURL %>" alt="" style="width: 100px;height: 100px;">
+                                    </td>
+                                    <td><%= el.name%></td>
+                                    <td><%= el.description%></td>
+                                    <td><%= el.minute%></td>
+                                    <td><%= el.formattedPrice()%></td>
+                                    <td><%= el.Category.name%></td>
+                                    <td>
+                                        <a href="/cms/courses/<%= el.id %>/edit"><button class="btn btn-warning mb-3">Edit</button></a>
+                                        <a href="/cms/courses/<%= el.id %>/delete"><button class="btn btn-danger mb-3">Delete</button></a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<%- include('cmsPartial/cmsFoot') %>
