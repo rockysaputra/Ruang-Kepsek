@@ -1,8 +1,9 @@
 'use strict';
 const {
-  Model
+  Model, Sequelize
 } = require('sequelize');
 const formatPrice = require('../helper/formatprice');
+const {Op} = require("sequelize")
 
 module.exports = (sequelize, DataTypes) => {
   class Course extends Model {

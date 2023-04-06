@@ -3,10 +3,15 @@
 
     <h2 class="text-center text-danger">List of Ruang Kepsek Courses</h2>
 
+    <form action="" method="get">
+        <input type="text" name="search" id="">
+        <button type="submit">Submit</button>
+    </form>
+
     <!-- Data section -->
     <div class="container">
         <div class="row">
-            <div class="col-md-6 text-center mx-auto">
+            <div class="col-md-6 text-center mx-auto mt-4">
                 <a href="/cms/courses/add"><button class="btn btn-info">Add New Course</button></a>
             </div>
         </div>
@@ -31,7 +36,7 @@
                           <tbody >
                             <% data.forEach((el,i) => { %>
                                 <tr class="text-center">
-                                    <td><%= i + 1 %></td>
+                                    <td><%= i+1 %></td>
                                     <td>
                                         <img src="<%= el.photoURL %>" alt="" style="width: 100px;height: 100px;">
                                     </td>

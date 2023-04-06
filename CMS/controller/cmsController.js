@@ -1,7 +1,8 @@
 const {Category,Course} = require("../models")
+const { Op } = require("sequelize");
 class cmsController{
     static showCategory(req,res){
-        Category.findAll()
+        Category.findCategory()
             .then((data)=>{
                 res.render("cmsHome" , {data , title:"Category Page"})
             })
@@ -11,12 +12,25 @@ class cmsController{
     }
 
     static showCourse(req,res){
-        Course.findAll({
+        const search = req.query.search
+        let option = {
             include:{
                 model:Category,
                 attributes: ["name"]
+            },
+            order:[
+                ["id","ASC"]
+            ]
+        }
+        if(search){
+            option.where={
+                name:{
+                    [Op.iLike] : `%${search}%`
+                }
             }
-        })
+        }
+        // console.log(option);
+        Course.findAll(option)
             .then((data)=>{
                 // res.send(data)
                 res.render("cmsCourses",{data , title:"List Courses"})
@@ -38,10 +52,10 @@ class cmsController{
     }
 
     static addData(req,res){
-        const {name,description,duration,price,CategoryId} = req.body
+        const {name,description,photoURL,duration,price,CategoryId} = req.body
         
         Course.create({
-            name,description,duration,price,CategoryId
+            name,description,duration,photoURL,price,CategoryId
         })
             .then((data)=>{
                 res.redirect("/cms/courses")

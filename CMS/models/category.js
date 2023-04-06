@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       Category.hasMany(models.Course)
     }
 
+    static findCategory(){
+      return Category.findAll()
+    }
     get formatDate(){
       const event = new Date(this.createdAt);
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
